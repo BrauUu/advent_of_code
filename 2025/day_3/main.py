@@ -6,17 +6,37 @@ my_file = ROOT_DIR / 'data.txt'
 data = open(my_file)
 total = 0
 
+# FIRST PART SOLUTION:
+# for banks in data.readlines():
+#     n1 = 0
+#     n2 = 0
+#     l = len(banks[:-1])
+#     for i in range(0, l, 1):
+#         battery_joltage = int(banks[i])
+#         if battery_joltage > n1 and i < l-1:
+#             n1 = battery_joltage
+#             n2 = 0
+#         elif battery_joltage > n2:
+#             n2 = battery_joltage
+#     total += int(f'{n1}{n2}')
+
 for banks in data.readlines():
-    n1 = 0
-    n2 = 0
-    l = len(banks[:-1])
-    for i in range(0, l, 1):
+    n = [0 for _ in range(0,12,1)]
+    j = 0
+    for i in range(0, len(banks[:-1]), 1):
         battery_joltage = int(banks[i])
-        if battery_joltage > n1 and i < l-1:
-            n1 = battery_joltage
-            n2 = 0
-        elif battery_joltage > n2:
-            n2 = battery_joltage
-    total += int(f'{n1}{n2}')
+        leftOptionsNum = len(banks[i+1:-1])
+        while battery_joltage > n[j]:
+            if battery_joltage > n[j-1] and j > 0 and leftOptionsNum > 11 - (j):
+                n[j] = 0
+                j -= 1
+            else:
+                n[j] = battery_joltage
+        if j < 11:
+            j += 1
+    n = [str(v) for v in n]
+    temp = ''.join(n)
+    total += int(temp)
+
 print(total)
 data.close()
