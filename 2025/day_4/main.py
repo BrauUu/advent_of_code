@@ -41,4 +41,7 @@ while(True):
     if newRollsCount == 0:
         break
     rollsCount += newRollsCount
+
+
 print(rollsCount)
+data.close()
