@@ -5,26 +5,28 @@ my_file = ROOT_DIR / "data.txt"
 
 data = open(my_file)
 lines = data.readlines()
-ind = 0
 values = []
 totals = []
-# PART 1:
-# for line in lines:
-#     line = line[:-1]
-#     tempValues = list(map(lambda v: v.strip() ,filter(lambda v : True if v else False, line.split(' '))))
-#     values.append(tempValues)
+# FIRST PART SOLUTION
+for line in lines:
+    line = line[:-1]
+    tempValues = list(map(lambda v: v.strip() ,filter(lambda v : True if v else False, line.split(' '))))
+    values.append(tempValues)
 
-# for i in range(0, len(values[0]), 1):
-#     totals.append(0)
-#     signal = values[-1][i]
-#     for g in range(0, len(values) - 1, 1):
-#         value = int(values[g][i])
-#         if signal == '+':
-#             totals[i] += value
-#         elif signal == '*':
-#             totals[i] = value * (totals[i] if totals[i] != 0 else 1)
+for i in range(0, len(values[0]), 1):
+    totals.append(0)
+    signal = values[-1][i]
+    for g in range(0, len(values) - 1, 1):
+        value = int(values[g][i])
+        if signal == '+':
+            totals[i] += value
+        elif signal == '*':
+            totals[i] = value * (totals[i] if totals[i] != 0 else 1)
 
-# PART 2
+# SECOND PART SOLUTION
+values = []
+totals = []
+
 tempList = []
 for i in range(2, len(lines[0]) + 1, 1):
     tempValue = ''
